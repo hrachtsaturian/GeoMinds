@@ -128,7 +128,7 @@ def profile(user_id):
         return redirect("/")
 
     user = User.query.get_or_404(user_id)
-    team_map = {"1": "Water", "2": "Earth", "3": "Fire", "4": "Air"}
+    team_map = {"1": "water", "2": "earth", "3": "fire", "4": "air"}
     total_score = sum(
         [
             game.score
