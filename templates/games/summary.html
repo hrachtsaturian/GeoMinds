@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="summary">
+  <h1>Congratulations!</h1>
+  <h3>You finished the game!</h3>
+  <hr />
+  <h2>Your score is {{ game.score }}</h2>
+  <hr />
+  <h3>Summary:</h3>
+  <h4>Correct {{ total_correct_answers}}/20</h4>
+  <hr />
+  {% for question in game.questions %}
+  <h4><p>{{ question.question_text | safe }}</p></h4>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-6 col-sm-3">
+        <a
+          style="min-width: 250px"
+          class="btn no-pointer {{ 'btn-success' if question.choices[0].id == question.correct_choice_id else 'btn-danger' if question.user_answer.choice_id == question.choices[0].id else 'btn-outline-primary'}}"
+          role="button"
+          >{{ question.choices[0].choice_text | safe}}</a
+        >
+      </div>
+      <div class="col-6 col-sm-3">
+        <a
+          style="min-width: 250px"
+          class="btn no-pointer {{ 'btn-success' if question.choices[1].id == question.correct_choice_id else 'btn-danger' if question.user_answer.choice_id == question.choices[1].id else 'btn-outline-primary'}}"
+          role="button"
+          >{{ question.choices[1].choice_text | safe }}</a
+        >
+      </div>
+
+      <div style="margin-bottom: 16px" class="w-100"></div>
+
+      <div class="col-6 col-sm-3">
+        <a
+          style="min-width: 250px"
+          class="btn no-pointer {{ 'btn-success' if question.choices[2].id == question.correct_choice_id else 'btn-danger' if question.user_answer.choice_id == question.choices[2].id else 'btn-outline-primary'}}"
+          role="button"
+          >{{ question.choices[2].choice_text | safe }}</a
+        >
+      </div>
+      <div class="col-6 col-sm-3">
+        <a
+          style="min-width: 250px"
+          class="btn no-pointer {{ 'btn-success' if question.choices[3].id == question.correct_choice_id else 'btn-danger' if question.user_answer.choice_id == question.choices[3].id else 'btn-outline-primary'}}"
+          role="button"
+          >{{ question.choices[3].choice_text | safe }}</a
+        >
+      </div>
+    </div>
+  </div>
+  <hr />
+  {% endfor%}
+
+  <h2>
+    Want to play more?
+    <a style="color: green; text-decoration: none" href="/">Let's go!</a>
+  </h2>
+  <hr />
+</div>
+
+{% endblock %}

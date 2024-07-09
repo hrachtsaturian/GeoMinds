@@ -1,0 +1,88 @@
+{% extends 'base.html' %} {% block content %}
+<div
+  style="margin-top: 32px"
+  class="row justify-content-md-center align-items-center"
+>
+  <h1 style="margin-left: 64px" class="timer">Time remaining --:--</h1>
+  <h2 style="margin-top: 64px">
+    <p>{{ active_question.question_text | safe }}</p>
+  </h2>
+  <form method="POST" action="/questions/{{ active_question.id }}/answers">
+    <div style="margin-top: 32px" class="container text-center">
+      <div class="row">
+        <div class="col-6 col-sm-3">
+          <a
+            style="min-width: 250px"
+            onclick="selectChoice('{{ choices[0].id }}', '{{ is_answered }}')"
+            id="choice-{{ choices[0].id }}"
+            href="#"
+            class="btn {{ choice_colors[choices[0].id] }} {{ 'no-pointer' if is_answered else ''}}"
+            role="button"
+            >{{ choices[0].choice_text | safe}}</a
+          >
+        </div>
+        <div class="col-6 col-sm-3">
+          <a
+            style="min-width: 250px"
+            onclick="selectChoice('{{ choices[1].id }}', '{{ is_answered }}')"
+            id="choice-{{ choices[1].id }}"
+            href="#"
+            class="btn {{ choice_colors[choices[1].id] }} {{ 'no-pointer' if is_answered else ''}}"
+            role="button"
+            >{{ choices[1].choice_text | safe }}</a
+          >
+        </div>
+
+        <div style="margin-bottom: 16px" class="w-100"></div>
+
+        <div class="col-6 col-sm-3">
+          <a
+            style="min-width: 250px"
+            onclick="selectChoice('{{ choices[2].id }}', '{{ is_answered }}')"
+            id="choice-{{ choices[2].id }}"
+            href="#"
+            class="btn {{ choice_colors[choices[2].id] }} {{ 'no-pointer' if is_answered else ''}}"
+            role="button"
+            >{{ choices[2].choice_text | safe }}</a
+          >
+        </div>
+        <div class="col-6 col-sm-3">
+          <a
+            style="min-width: 250px"
+            onclick="selectChoice('{{ choices[3].id }}', '{{ is_answered }}')"
+            id="choice-{{ choices[3].id }}"
+            href="#"
+            class="btn {{ choice_colors[choices[3].id] }} {{ 'no-pointer' if is_answered else ''}}"
+            role="button"
+            >{{ choices[3].choice_text | safe }}</a
+          >
+        </div>
+      </div>
+    </div>
+    <input type="hidden" id="selectedChoice" name="choice_id" />
+    {% if not is_answered %}
+    <button
+      style="min-width: 125px; margin-top: 32px; margin-left: 260px"
+      id="confirmButton"
+      class="btn btn-primary btn-block btn-lg"
+      disabled
+    >
+      Confirm
+    </button>
+    {% else %}
+    <button
+      style="min-width: 125px; margin-top: 32px; margin-left: 260px"
+      type="button"
+      onclick="redirectToPage('{{ next }}')"
+      class="btn btn-primary btn-block btn-lg"
+    >
+      {{ 'Finish' if is_finished else 'Next'}}
+    </button>
+    {% endif %}
+  </form>
+
+  <script>
+    startTimer("{{ game.createdAt }}");
+  </script>
+</div>
+{% endblock %}

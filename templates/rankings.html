@@ -1,0 +1,53 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1 id="table-header">Top GeoMinds</h1>
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+  th,
+  td {
+    padding: 8px;
+    text-align: left;
+  }
+</style>
+
+<table class="table">
+  <thead class="table-success">
+    <tr>
+      <th>Place</th>
+      <th>GeoMind</th>
+      <th>Team</th>
+      <th>Total score</th>
+      <th>Total games played</th>
+      <th>Average score per game*</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ranking in ranking_list %}
+    <tr>
+      <td>{{ ranking.place }}</td>
+      <td>
+        <a
+          style="color: green; text-decoration: none"
+          href="users/{{ ranking.id }}"
+          >{{ ranking.geomind }}</a
+        >
+      </td>
+      <td>{{ ranking.team }}</td>
+      <td>{{ ranking.total_score }}</td>
+      <td>{{ ranking.total_games_played }}</td>
+      <td>{{ ranking.average_score_per_game }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p>* - top scorer of this column is leading the ranking list</p>
+
+{% endblock %}

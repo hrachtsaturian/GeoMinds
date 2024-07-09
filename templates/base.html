@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GeoMinds: Trivia Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bootstrap/dist/css/bootstrap.css"
+    />
+    <script src="https://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/bootstrap"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <link rel="stylesheet" href="/static/stylesheets/style.css" />
+  </head>
+  <body>
+    <div>
+      <nav class="navbar sticky-top" style="background-color: #1c8241">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a href="/" class="navbar-brand">
+              <img
+                class="framed"
+                src="/static/images/logo.jpg"
+                style="width: 100px"
+                alt="logo"
+              />
+            </a>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            {% if not g.user %}
+            <div style="display: flex; gap: 20px">
+              <div>
+                <ul style="list-style-type: none; padding: 0">
+                  <li>
+                    <a
+                      style="color: white; text-decoration: none"
+                      href="/signup"
+                      >Sign up</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <ul style="list-style-type: none; padding: 0">
+                  <li>
+                    <a style="color: white; text-decoration: none" href="/login"
+                      >Log in</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            {% elif not g.is_active_game %}
+            <div style="display: flex; gap: 20px">
+              <div>
+                <ul style="list-style-type: none; padding: 0">
+                  <li>
+                    <a
+                      style="color: white; text-decoration: none"
+                      href="/logout"
+                      >Log out</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <ul style="list-style-type: none; padding: 0">
+                  <li>
+                    <a
+                      style="color: white; text-decoration: none"
+                      href="/rankings"
+                      >Rankings</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <div class="container">
+        {% for category, message in get_flashed_messages(with_categories=True)
+        %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %} {% block content %} {% endblock %}
+      </div>
+    </div>
+  </body>
+</html>

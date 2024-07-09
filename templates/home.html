@@ -1,0 +1,56 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row justify-content-md-center">
+  <div class="col-md-7 col-lg-5">
+    {% if not g.user %}
+    <div style="margin-top: 48px">
+      <h4>Welcome to GeoMinds: Trivia Game!</h4>
+      <p>
+        Your ultimate destination for fun and challenging geography and
+        countries trivia! Test your knowledge, learn interesting facts, and
+        explore the world through engaging quizzes. Join us on this educational
+        adventure and become a geography whiz today!
+      </p>
+    </div>
+    <hr />
+    <h5 class="join-message-signup">
+      <a style="color: green; text-decoration: none" href="/signup">Sign up</a>
+      to play the game!
+    </h5>
+    <hr />
+    <div class="logo-container">
+      <img src="/static/images/logo.jpg" style="width: 400px" alt="logo" />
+    </div>
+    {% else %}
+    <h2 class="join-message">Let's play Trivia Game!</h2>
+    <br />
+    <ul>
+      <li>You have 5 minutes to answer 20 questions.</li>
+      <li>
+        Each question will have four options to choose from. Once you confirm
+        your choice, the correct answer will be displayed, and you will proceed
+        to the next question.
+      </li>
+      <li>
+        For each correct answer, you'll earn 5 points on easy difficulty, 7
+        points on medium, and 10 points on hard.
+      </li>
+      <li>Get ready to test your knowledge and score high. Let's go!</li>
+    </ul>
+    <form method="POST" action="/games">
+      <label>Choose difficulty:</label>
+      <select
+        name="difficulty"
+        class="form-select"
+        aria-label="Default select example"
+      >
+        <option value="1">Easy</option>
+        <option value="2">Medium</option>
+        <option value="3">Hard</option>
+      </select>
+      <button class="btn btn-success btn-block btn-md">Start Game</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
