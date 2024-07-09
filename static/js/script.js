@@ -47,3 +47,12 @@ async function startTimer(createdAt) {
     runTimer(createdAtUTC);
   }, 1000);
 }
+
+$(document).ready(() => {
+  $("form").on("submit", () => {
+    $("#confirmButton").prop("disabled", true);
+    $("#startGame").prop("disabled", true);
+    $("#confirmEditButton").prop("disabled", true);
+    $("#deleteUserButton").prop("disabled", true);
+  });
+});
