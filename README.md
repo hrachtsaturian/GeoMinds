@@ -25,7 +25,13 @@ The game is designed for a general audience.
 ### API
 The following API is used to fetch trivia questions:
 
-https://opentdb.com/api.php?amount=20&category=22&difficulty={difficulty_name}&type=multiple
+GET - `https://opentdb.com/api.php`
+
+Query params: 
+- amount=20 (20 questions)
+- category=22 (geography category)
+- difficulty=easy (easy, medium, hard)
+- type=multiple (4 choices)
 
 ### Live Demo
 Check out the live demo: GeoMinds on Render
@@ -41,15 +47,25 @@ https://geominds.onrender.com
 - UserAnswer: Represents the user's answer to a question.
   
 #### RESTful API
-- GET /users/<user_id>: Retrieve user information.
-- POST /games/: Create a new game session.
-- GET /games/<game_id>/questions/<question_id>: Retrieve a specific question in a game.
-- POST /games/<game_id>/questions/<question_id>/answers: Submit an answer to a question.
-- GET /games/<game_id>/summary: Retrieve the summary of a game session.
+- GET `/users/<user_id>` Retrieve user information.
+- POST `/games` Create a new game session.
+- GET `/games/<game_id>/questions/<question_id>` Retrieve a specific question in a game.
+- POST `/games/<game_id>/questions/<question_id>/answers` Submit an answer to a question.
+- GET `/games/<game_id>/summary` Retrieve the summary of a game session.
   
 #### Functionality Features
 - User Authentication/Authorization: Signup and login functionality.
-- Game Sessions: Create games, score points, and set up timers for each game.
-- Rankings Management: Create a leaderboard that sorts users by their scores from highest to lowest.
+- Game Sessions: Create games, score points, and set up time control.
+- Rankings: View the leaderboard sorted by users' scores from highest to lowest.
+
+#### How to run locally
+1. Set up PostgreSQL database named `geominds`
+  - `CREATE DATABASE geominds;`
+2. Install packages (suggested to use Python 3.7)
+  - `pip3.7 install -r requirements.txt`
+3. Launch flask application
+  - `flask run`
+4. Navigate to the following URL in your browser
+  - `http://127.0.0.1:5000/`
   
 ###### Enjoy the game and test your geography knowledge!
