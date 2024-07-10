@@ -12,9 +12,8 @@ function redirectToPage(next) {
   window.location.href = next;
 }
 
-async function runTimer(createdAtUTC) {
-  const currentTime = new Date();
-  const difference = currentTime - createdAtUTC + 7 * 60 * 60 * 1000;
+async function runTimer(createdAtUTC, currentTimeUTC) {
+  const difference = currentTimeUTC - createdAtUTC;
   const differenceSec = 300 - Math.round(difference / 1000);
   let minutes = Math.floor(differenceSec / 60);
   let seconds = differenceSec - minutes * 60;
@@ -40,11 +39,15 @@ async function runTimer(createdAtUTC) {
   }
 }
 
-async function startTimer(createdAt) {
+async function startTimer(createdAt, currentTime) {
   const createdAtUTC = new Date(createdAt);
-  await runTimer(createdAtUTC);
+  const currentTimeUTC = new Date(currentTime);
+  let countDown = 0
+  await runTimer(createdAtUTC, currentTimeUTC);
   setInterval(() => {
-    runTimer(createdAtUTC);
+    countDown += 1000
+    runTimer(createdAtUTC, new Date(currentTimeUTC.getTime() + countDown));
+
   }, 1000);
 }
 

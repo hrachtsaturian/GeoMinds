@@ -424,6 +424,7 @@ def show_game(game_id, question_id):
             active_question=active_question,
             is_answered=False,
             choice_colors=choice_colors,
+            current_time=datetime.utcnow()
         )
 
     is_finished = False
@@ -442,6 +443,7 @@ def show_game(game_id, question_id):
         is_answered=True,
         choice_colors=choice_colors,
         next=next_url,
+        current_time=datetime.utcnow(),
         is_finished=is_finished,
     )
 
